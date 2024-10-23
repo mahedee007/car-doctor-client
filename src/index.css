@@ -9,7 +9,13 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  
   font-family: "Inter", sans-serif;
   
+}
+.btn-primary{
+  @apply bg-primary text-white border-none hover:bg-primary
+}
+.btn-outline{
+  @apply border-white text-white hover:bg-transparent hover:border-primary hover:text-primary
 }
