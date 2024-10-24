@@ -9,7 +9,7 @@ import { AuthContext } from '../Providers/AuthProvider';
 
 const Signup = () => {
 
-    const { signUp} = useContext(AuthContext)
+    const { signUp, signInWithGoogle} = useContext(AuthContext)
 const handleSignUp = event  => {
     event.preventDefault();
     const form = event.target;
@@ -24,6 +24,27 @@ const handleSignUp = event  => {
     })
     .catch(err => console.error(err));
 
+}
+const handleGoogleSignIn = ()=>{
+    signInWithGoogle ()
+    .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
 }
 
     return (
@@ -61,7 +82,7 @@ const handleSignUp = event  => {
                 <p className='text-center font-medium text-[18px]'>Or Signup With</p>
                 <div className='text-center font-bold'>
                     
-                    <button className='text-5xl '><FcGoogle/></button> 
+                    <button onClick={handleGoogleSignIn} className='text-5xl '><FcGoogle/></button> 
                     <p>Already Have An Account? <Link className='text-primary' to='/login'>Sign In</Link> </p>
                 </div>
                 
